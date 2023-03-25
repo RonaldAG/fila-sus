@@ -10,8 +10,7 @@ public class HospitalQueueManagement {
 	private int next;
 	private int quantidadePacientes;
 	private Random random;
-	private Scanner sc =  new Scanner(System.in);
-	
+
 	public HospitalQueueManagement(){
 		random = new Random();
 		queue = filaInicial();
@@ -56,30 +55,22 @@ public class HospitalQueueManagement {
 	
 	
 	public void drawboard() {
-		int var = 4;
-		do {
-			System.out.println("(1) Retirar nova senha\n"
-					+ "(2) Próximo.\r\n"
-					+ "(3) Exibir Quadro\r\n"
-					+ "(4) Sair");
-			var = sc.nextInt();
-			
-			if(var == 1) {
-				System.out.print("Preferencial? y/n ");
-				String preferencial = sc.next();
-				
-				if(preferencial.equals("y")) {
-					getPassword(true);	
-				}
-				else {
-					getPassword(false);
-				}
-			}
-			
-			System.out.println(Arrays.toString(queue));
-			
-		} while(var != 4);
+		String lastNames = "-", nextName = " - ";
 		
+		if(next != -1) {
+			nextName = queue[next];
+			int end = Math.max(0, next - 3);
+			
+			for(int i = next - 1; i >= end; i--) {
+				lastNames += queue[i] + "-";
+			}
+		}
+		
+		System.out.printf("|----------------------------|\n");
+		System.out.printf("| Próximo: %s             |\n", nextName);
+		System.out.printf("| Próximas senhas:           |\n");
+		System.out.printf("| %s |\n", lastNames);
+		System.out.printf("|----------------------------|\n");
 		
 	}
 
@@ -90,8 +81,12 @@ public class HospitalQueueManagement {
 		}
 		
 		String element = queue[next];
-		next++;
 		
+		if(element == null) {
+			return queue[next - 1];
+		}
+		
+		next++;
 		return element;
 	}
 	
@@ -126,7 +121,6 @@ public class HospitalQueueManagement {
 				if(queue[i].endsWith("N")) {
 					reorganizaFila(i);
 					queue[i] = element;
-					System.out.println(queue[i]);
 					hasN = true;
 					break;
 				}
@@ -147,7 +141,6 @@ public class HospitalQueueManagement {
 	//Metodo para reorganizar a fila
 	private void reorganizaFila(int posicaoInicial) {
 		for(int i = quantidadePacientes - 1; i >= posicaoInicial; i--) {
-			System.out.println(queue[i]);
 			queue[i+1] = queue[i]; 
 		}
 	}
