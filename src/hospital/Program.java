@@ -29,11 +29,10 @@ public class Program {
 				}
 			} else if(var == 2) {
 				String next = hospital.next();
-				System.out.println(next);
 			} else if(var == 3) {
 				hospital.drawboard();
 			}
-			
+
 		} while(var != 4);
 	}
 }

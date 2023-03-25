@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HospitalQueueManagement {
-	private String[] queue;
+	public String[] queue;
 	private int last;
 	private int next;
 	private int quantidadePacientes;
@@ -45,11 +45,9 @@ public class HospitalQueueManagement {
 		}
 		
 		//Pega o proximo
-		
-		
-		
 		enfileirar(password);
-		
+		last++;
+
 		return password;
 	}
 	
@@ -68,7 +66,7 @@ public class HospitalQueueManagement {
 		
 		System.out.printf("|----------------------------|\n");
 		System.out.printf("| Próximo: %s             |\n", nextName);
-		System.out.printf("| Próximas senhas:           |\n");
+		System.out.printf("| Ultimas senhas:           |\n");
 		System.out.printf("| %s |\n", lastNames);
 		System.out.printf("|----------------------------|\n");
 		
